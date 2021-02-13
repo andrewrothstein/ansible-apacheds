@@ -1,0 +1,29 @@
+---
+- include_role:
+    name: andrewrothstein.systemd_service
+  vars:
+    systemd_service_activate: '{{ apacheds_config_activate }}'
+    systemd_service_def:
+      name: '{{ apacheds_config_name | default("apacheds") }}'
+      user: '{{ apacheds_config_user | default("apacheds") }}'
+      group: '{{ apacheds_config_group | default("apacheds") }}'
+      description: ApacheDS
+      start:
+        exe: '{{ apacheds_entrypoint }}'
+        args: '{{ apacheds_config_instance_name }} start'
+      stop:
+        exe: '{{ apacheds_entrypoint }}'
+        args: '{{ apacheds_config_instance_name }} stop'
+      env:
+        dir: '{{ apacheds_home_dir }}'
+        filename: env
+        data:
+          ADS_HOME: '{{ apacheds_home_dir }}'
+          ADS_INSTANCES: '{{ apacheds_instances_dir }}'
+      restart:
+        policy: always
+        sec: 5
+      after:
+        - network-online.target
+      wanted_by:
+        - multi-user.target

@@ -1,0 +1,13 @@
+---
+# vars file for apacheds
+apacheds_name: apacheds-{{ apacheds_ver }}
+apacheds_archive: '{{ apacheds_name }}.{{ apacheds_archive_type | default("tar.gz") }}'
+apacheds_tmp_archive: /tmp/{{ apacheds_archive }}
+apacheds_url: '{{ apacheds_mirror.host }}/{{ apacheds_mirror.path }}/{{ apacheds_ver }}/{{ apacheds_archive }}'
+
+apacheds_checksum: '{{ apacheds_checksums[apacheds_ver] }}'
+
+apacheds_home_dir: '{{ apacheds_parent_install_dir }}/{{ apacheds_name }}'
+apacheds_link_dir: '{{ apacheds_parent_install_dir }}/apacheds'
+apacheds_instances_dir: '{{ apacheds_home_dir }}/instances'
+apacheds_entrypoint: '{{ apacheds_link_dir }}/bin/apacheds.sh'

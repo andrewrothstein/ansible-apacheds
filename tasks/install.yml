@@ -1,0 +1,39 @@
+---
+- name: checking for installation in {{ apacheds_home_dir }}
+  become: root
+  stat:
+    path: '{{ apacheds_home_dir }}'
+  changed_when: False
+  register: apacheds_binary
+- when: not apacheds_binary.stat.exists
+  block:
+    - name: downloading {{ apacheds_url }} to {{ apacheds_tmp_archive }}
+      become: yes
+      become_user: root
+      get_url:
+        url: '{{ apacheds_url }}'
+        dest: '{{ apacheds_tmp_archive }}'
+        checksum: '{{ apacheds_checksum }}'
+        mode: 0644
+    - name: unarchiving {{ apacheds_tmp_archive }} to {{ apacheds_parent_install_dir }}
+      become: yes
+      become_user: root
+      unarchive:
+        remote_src: yes
+        src: '{{ apacheds_tmp_archive }}'
+        dest: '{{ apacheds_parent_install_dir }}'
+        creates: '{{ apacheds_home_dir }}'
+  always:
+    - name: rm {{ apacheds_tmp_archive }}
+      become: yes
+      become_user: root
+      file:
+        path: '{{ apacheds_tmp_archive }}'
+        state: absent
+- name: linking {{ apacheds_link_dir }} to {{ apacheds_home_dir }}
+  become: yes
+  become_user: root
+  file:
+    src: '{{ apacheds_home_dir }}'
+    dest: '{{ apacheds_link_dir }}'
+    state: link

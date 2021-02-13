@@ -1,0 +1,20 @@
+---
+# defaults file for apacheds
+apacheds_ver: '2.0.0.AM26'
+apacheds_mirror:
+  host: https://downloads.apache.org
+  path: directory/apacheds/dist
+
+apacheds_parent_install_dir: /usr/local
+
+apacheds_config_activate: True
+apacheds_config_name: apacheds
+apacheds_config_user: apacheds
+apacheds_config_group: apacheds
+
+apacheds_config_init: systemd
+apacheds_config_instance_name: default
+
+apacheds_checksums:
+  # https://downloads.apache.org/directory/apacheds/dist/2.0.0.AM26/apacheds-2.0.0.AM26.tar.gz.sha512
+  '2.0.0.AM26': sha512:5B0F53077911BF4BB03CB9DCACC94DD63200912B85A35B66B783455CCDD66E0F548BE49182934006EFBAE4A98C13E74815E4BF655BD081F1D3A24B6B9109C9EC

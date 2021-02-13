@@ -1,0 +1,22 @@
+---
+- name: resolve platform specific vars
+  include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+- include_role:
+    name: andrewrothstein.service_account
+  vars:
+    service_account:
+      user:
+        name: apacheds
+        group: apacheds
+      directories:
+        - d: '{{ apacheds_home_dir }}'
+- include_tasks: install.yml
+- include_tasks: configure.yml

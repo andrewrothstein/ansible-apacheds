@@ -1,0 +1,6 @@
+---
+- hosts: all
+  vars:
+    apacheds_config_activate: False
+  roles:
+  - role: '{{ playbook_dir }}'
