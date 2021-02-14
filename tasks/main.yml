@@ -9,6 +9,7 @@
       skip: true
       paths:
         - '{{ role_path }}/vars'
+- include_tasks: install.yml
 - include_role:
     name: andrewrothstein.service_account
   vars:
@@ -16,7 +17,5 @@
       user:
         name: apacheds
         group: apacheds
-      directories:
-        - d: '{{ apacheds_home_dir }}'
-- include_tasks: install.yml
+      directories: '{{ apacheds_config_instance_subdirs }}'
 - include_tasks: configure.yml

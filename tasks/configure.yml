@@ -1,3 +1,13 @@
 ---
+- name: configure instance templates
+  become: yes
+  become_user: root
+  with_items:
+    - d: '{{ apacheds_config_instance_conf_dir }}'
+      f: log4j.properties
+  template:
+    src: '{{ item.f }}.j2'
+    dest: '{{ item.d }}/{{ item.f }}'
+    mode: '{{ item.m | default("0644") }}'
 - include_tasks: systemd.yml
   when: apacheds_config_init == "systemd"

@@ -8,6 +8,7 @@
       user: '{{ apacheds_config_user | default("apacheds") }}'
       group: '{{ apacheds_config_group | default("apacheds") }}'
       description: ApacheDS
+      pidfile: '{{ apacheds_config_instance_run_dir }}/apacheds.pid'
       start:
         exe: '{{ apacheds_entrypoint }}'
         args: '{{ apacheds_config_instance_name }} start'
@@ -15,11 +16,13 @@
         exe: '{{ apacheds_entrypoint }}'
         args: '{{ apacheds_config_instance_name }} stop'
       env:
+        addl_files:
+          - '-/usr/local/openjdk-jre/openjdk.env'
         dir: '{{ apacheds_home_dir }}'
         filename: env
         data:
           ADS_HOME: '{{ apacheds_home_dir }}'
-          ADS_INSTANCES: '{{ apacheds_instances_dir }}'
+          ADS_INSTANCES: '{{ apacheds_config_instances_dir }}'
       restart:
         policy: always
         sec: 5

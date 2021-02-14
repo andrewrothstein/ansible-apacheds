@@ -37,7 +37,10 @@ galaxy_info:
 dependencies:
   - role: andrewrothstein.unarchive-deps
     version: v1.1.5
+  - role: andrewrothstein.openjdk
+    version: v2.0.12
+    openjdk_app: jre
   - role: andrewrothstein.service_account
     version: v0.0.1
   - role: andrewrothstein.systemd_service
-    version: v3.0.0
+    version: v3.0.3

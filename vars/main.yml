@@ -9,5 +9,14 @@ apacheds_checksum: '{{ apacheds_checksums[apacheds_ver] }}'
 
 apacheds_home_dir: '{{ apacheds_parent_install_dir }}/{{ apacheds_name }}'
 apacheds_link_dir: '{{ apacheds_parent_install_dir }}/apacheds'
-apacheds_instances_dir: '{{ apacheds_home_dir }}/instances'
 apacheds_entrypoint: '{{ apacheds_link_dir }}/bin/apacheds.sh'
+
+apacheds_config_instance_dir: '{{ apacheds_config_instances_dir }}/{{ apacheds_config_instance_name }}'
+apacheds_config_instance_conf_dir: '{{ apacheds_config_instance_dir }}/conf'
+apacheds_config_instance_run_dir: '{{ apacheds_config_instance_dir }}/run'
+apacheds_config_instance_subdirs:
+  - d: '{{ apacheds_config_instance_dir }}/cache'
+  - d: '{{ apacheds_config_instance_conf_dir }}'
+  - d: '{{ apacheds_config_instance_dir }}/log'
+  - d: '{{ apacheds_config_instance_dir }}/partitions'
+  - d: '{{ apacheds_config_instance_run_dir }}'

@@ -1,8 +1,9 @@
 ---
-- name: checking for installation in {{ apacheds_home_dir }}
-  become: root
+- name: checking for installation in {{ apacheds_entrypoint }}
+  become: yes
+  become_user: root
   stat:
-    path: '{{ apacheds_home_dir }}'
+    path: '{{ apacheds_entrypoint }}'
   changed_when: False
   register: apacheds_binary
 - when: not apacheds_binary.stat.exists

@@ -13,6 +13,7 @@ apacheds_config_user: apacheds
 apacheds_config_group: apacheds
 
 apacheds_config_init: systemd
+apacheds_config_instances_dir: /var/apacheds
 apacheds_config_instance_name: default
 
 apacheds_checksums:
