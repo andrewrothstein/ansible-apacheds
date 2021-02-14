@@ -5,11 +5,8 @@ before_install: "if [[ \"$TRAVIS_OS_NAME\" == \"osx\" ]]\nthen\n  brew upgrade o
 branches:
   except:
   - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-dist: xenial
+dist: focal
 env:
-- OS=alpine_3.11
-- OS=alpine_3.12
-- OS=alpine_edge
 - OS=archlinux_latest
 - OS=centos_7
 - OS=centos_8
@@ -23,11 +20,11 @@ env:
 - OS=ubuntu_focal
 - OS=ubuntu_xenial
 language: python
-python: 3.9
+python: '3.9'
 script:
 - ansible-galaxy-local-deps-write
-- dcb --upstreamgroup andrewrothstein --upstreamapp docker-ansible-role --pull ${OS}
-  --write ${OS} --build ${OS} --push ${OS}
+- dcb --upstreamgroup andrewrothstein --upstreamapp docker-ansible-role --pullall
+  --writeall --buildall --pushall --alltags ${OS}
 services:
 - docker
 sudo: required
