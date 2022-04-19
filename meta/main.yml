@@ -31,7 +31,7 @@ galaxy_info:
 
 dependencies:
   - andrewrothstein.unarchive-deps
-  - name: andrewrothstein.termurin
+  - name: andrewrothstein.temurin
     openjdk_app: jre
   - andrewrothstein.service_account
   - andrewrothstein.systemd_service
